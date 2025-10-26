@@ -1,0 +1,264 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Kenil's Library Site</title>
+<style>
+  :root{
+    --card-w:160px;
+    --gap:12px;
+    --bg: #0b1220;
+    --accent:#ffd37a;
+    --track-pad:12px;
+  }
+  html,body{height:100%; margin:0; background:var(--bg); color:#fff; font-family:system-ui,Segoe UI,Roboto,Arial;}
+  main{padding:20px; max-width:1200px; margin:0 auto;}
+
+  h1{font-size:20px; margin:0 0 12px 6px}
+  h2{margin:18px 0 8px; font-size:18px; color:#fff;}
+
+  .hint{font-size:13px; color:#c8d6ea66; margin:6px 6px 14px;}
+
+  /* Featured / Choice of the Month */
+  .featured-row{margin:14px 0 28px;}
+  .featured-wrap{display:flex; gap:var(--gap); align-items:center;}
+  .featured-card{
+    flex: 0 0 calc(100% - 40px);
+    max-width:100%;
+    background:linear-gradient(180deg,#ffeedd,#fff0f6);
+    color:#2a1b12;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 18px 40px rgba(0,0,0,0.45);
+    min-height:300px;
+    position:relative;
+  }
+  .featured-cover{width:40%; float:left; display:block; height:100%; object-fit:cover;}
+  .featured-body{padding:20px 26px; display:flex; flex-direction:column; gap:10px;}
+  .featured-title{font-size:24px; font-weight:800; color:#a44a5a;}
+  .featured-meta{font-weight:600; color:#6b6b6b;}
+  .featured-blurb{color:#3b2f2f; line-height:1.45; font-size:15px;}
+
+  /* rows (genres) */
+  .track{
+    display:flex;
+    gap:var(--gap);
+    padding:var(--track-pad) 6px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+  }
+
+  .track::-webkit-scrollbar{height:9px;}
+  .track::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08); border-radius:6px;}
+
+  .card{
+    position:relative;
+    flex:0 0 var(--card-w);
+    scroll-snap-align:center;
+    border-radius:8px;
+    overflow:hidden;
+    background:linear-gradient(180deg,#1b2a36,#12202a);
+    box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    min-height:260px;
+    transition:transform .18s ease;
+    color:#fff;
+  }
+  .card:focus-within,
+  .card:hover{ transform: translateY(-6px); }
+
+  .cover{display:block; width:100%; height:180px; object-fit:cover; background:#222;}
+
+  /* Overlay with book info (hidden by default) */
+  .info{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    background: linear-gradient(180deg, rgba(10,12,15,0.02) 0%, rgba(4,8,12,0.85) 80%);
+    color:#fff;
+    padding:10px;
+    transform: translateY(70%);
+    opacity:0;
+    transition: transform .22s cubic-bezier(.2,.9,.25,1), opacity .22s linear;
+    font-size:13px;
+    line-height:1.3;
+    max-height:56%;
+    overflow:auto;
+  }
+  .card:hover .info,
+  .card:focus-within .info,
+  .card:active .info {
+    transform: translateY(0%);
+    opacity:1;
+  }
+
+  .title{font-weight:700; color:var(--accent); margin-bottom:6px; font-size:14px;}
+  .meta{font-weight:600; color:#d6e6ff88; font-size:12px; margin-bottom:6px;}
+  .blurb{font-size:12px; color:#d7e7ffcc;}
+
+  .card:focus-within { outline: 3px solid rgba(255,200,110,0.10); outline-offset:4px; }
+
+  /* Responsive adjustments */
+  @media (max-width:900px){
+    .featured-cover{width:45%;}
+    .featured-body{padding:16px;}
+  }
+  @media (max-width:680px){
+    .featured-wrap{flex-direction:column;}
+    .featured-cover{width:100%; height:200px;}
+    .featured-card{min-height:220px;}
+    :root{--card-w:140px;}
+  }
+  @media (max-width:420px){
+    :root{--card-w:128px;}
+    .hint{display:none;}
+  }
+  #button{
+    display:block;
+    margin:20px auto;
+    padding:12px 24px;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:24px;
+    background: linear-gradient(90deg,#ffd37a,#ffb86b);
+    border: none;
+    color:#5a2a2a;
+    box-shadow: 0 8px 18px rgba(255,160,90,0.25);
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Library — Choice & Genres</h1>
+  <p class="hint">Tip: swipe horizontally (touch/trackpad) or use the scrollbar. Hover or focus a book to read details.</p>
+
+  <!-- Choice of the Month / Featured -->
+  <section class="featured-row" aria-label="Choice of the Month">
+    <h2>Choice of the Month</h2>
+    <div class="featured-wrap">
+      <article class="featured-card" role="article" tabindex="0">
+        <img class="featured-cover" src="https://picsum.photos/640/640?random=900" alt="Featured cover">
+        <div class="featured-body">
+          <div class="featured-title">Choice of the Month — The Quiet Cosmos</div>
+          <div class="featured-meta">By F. Author — 2024</div>
+          <div class="featured-blurb">
+            A moving, intimate exploration of people trying to find meaning after a global technological shift. The Quiet Cosmos balances tender character work with quiet, surprising humor — a strong pick for readers who like thoughtful, human science fiction.
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Kids -->
+  <section aria-label="Kids">
+    <h2>Kids</h2>
+    <div class="track" role="list" tabindex="0">
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=211" alt="Cover: Adventure Pals">
+        <div class="info">
+          <div class="title">Adventure Pals</div>
+          <div class="meta">By K. Kiddo — 2017</div>
+          <div class="blurb">A fun, fast-paced story about two friends and a mysterious treasure map. Bright illustrations and silly antics make it perfect for early readers.</div>
+        </div>
+      </article>
+
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=212" alt="Cover: Forest Friends">
+        <div class="info">
+          <div class="title">Forest Friends</div>
+          <div class="meta">By L. Story — 2015</div>
+          <div class="blurb">Gentle tales about friendship and nature. Short chapters and warm themes — great for bedtime reading.</div>
+        </div>
+      </article>
+
+      <!-- add more kids cards -->
+    </div>
+  </section>
+
+  <!-- Programming -->
+  <section aria-label="Programming">
+    <h2>Programming</h2>
+    <div class="track" role="list" tabindex="0">
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=321" alt="Cover: Learn to Code">
+        <div class="info">
+          <div class="title">Learn to Code: Fun Projects</div>
+          <div class="meta">By Dev Mentor — 2021</div>
+          <div class="blurb">Beginner-friendly projects that teach core programming concepts through games and small apps. Great for school projects and self-study.</div>
+        </div>
+      </article>
+
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=322" alt="Cover: Python for Teens">
+        <div class="info">
+          <div class="title">Python for Teens</div>
+          <div class="meta">By I. Coder — 2020</div>
+          <div class="blurb">Clear explanations and hands-on examples that let learners build useful programs quickly. Covers basics to simple data projects.</div>
+        </div>
+      </article>
+
+      <!-- add more programming cards -->
+    </div>
+  </section>
+
+  <!-- Realistic Fiction -->
+  <section aria-label="Realistic Fiction">
+    <h2>Realistic Fiction</h2>
+    <div class="track" role="list" tabindex="0">
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=421" alt="Cover: Summer Streets">
+        <div class="info">
+          <div class="title">Summer Streets</div>
+          <div class="meta">By N. Writer — 2018</div>
+          <div class="blurb">A coming-of-age story about friendship, family, and small-town summers. Warmly written with honest moments and gentle humor.</div>
+        </div>
+      </article>
+
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=422" alt="Cover: The Second Chance">
+        <div class="info">
+          <div class="title">The Second Chance</div>
+          <div class="meta">By R. Novelist — 2012</div>
+          <div class="blurb">Two neighbors reconnect over a community project and discover how forgiving and change can open new paths in life.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Fantasy -->
+  <section aria-label="Fantasy">
+    <h2>Fantasy</h2>
+    <div class="track" role="list" tabindex="0">
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=511" alt="Cover: The Forest King">
+        <div class="info">
+          <div class="title">The Forest King</div>
+          <div class="meta">By D. Storyteller — 2014</div>
+          <div class="blurb">A lush, character-driven fantasy following a reluctant prince as he navigates politics and strange magic in the timberlands.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Science Fiction -->
+  <section aria-label="Science Fiction">
+    <h2>Science Fiction</h2>
+    <div class="track" role="list" tabindex="0">
+      <article class="card" role="listitem" tabindex="0">
+        <img class="cover" src="https://picsum.photos/300/400?random=611" alt="Cover: Future Tides">
+        <div class="info">
+          <div class="title">Future Tides</div>
+          <div class="meta">By C. Novelist — 2022</div>
+          <div class="blurb">A near-future thriller about memory, identity, and corporate power. The book mixes tech speculation with a fast emotional core.</div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <h3>More Genres Coming Soon!</h3>
+  <h3>We will add more books, but we need your help!</h3>
+  <button id="button"onclick="alert('Thank you for your interest! Please email us at kenilb2013@gmail.com to help suggest or donate books.')">Help Us Expand the Library!</button>
+</main>
+</scipt>
+</body>
+</html>
